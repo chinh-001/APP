@@ -65,7 +65,7 @@ const BottomTabs = () => {
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="TrangTimBanDuLich">
+      <Stack.Navigator initialRouteName="TrangChu">
         <Stack.Screen name="QuenMatKhau" component={QuenMatKhauScreen} options={{ headerShown: false }} />
         <Stack.Screen name="BottomTabs" component={BottomTabs} options={{ headerShown: false }} />
         <Stack.Screen name="XacMinhOTP" component={XacMinhOtpScreen} options={{ headerShown: false }} />
