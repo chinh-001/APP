@@ -20,7 +20,6 @@ import ThongBao from './screens/ThongBao';
 import DangKiTinhNguyenVienScreen from './screens/DangKiTinhNguyenVienScreen';
 import DKTinhNguyenVien from './screens/DKTinhNguyenVien';
 import NhanTin from './screens/NhanTin';
-import TrangChuScreen from './screens/TrangChuScreen';
 import TrangHomeDangTus from './screens/TrangHomeDangTus';
 import TrangTimBanDuLich from './screens/TrangTimBanDuLich';
 // Tạo Stack Navigator
@@ -60,7 +59,7 @@ const BottomTabs = () => {
       })}
     >
       {/* Thêm TrangChuScreen vào Bottom Tab */}
-      <Tab.Screen name="Home" component={TrangChuScreen} options={{ headerShown: false }} />
+      <Tab.Screen name="Home" component={TrangTimBanDuLich} options={{ headerShown: false }} />
       <Tab.Screen name="Search" component={TimKiem} />
       <Tab.Screen name="Add" component={DangBaiScreen} />
       <Tab.Screen name="Notifications" component={ThongBao} options={{ headerShown: false }} />
@@ -73,7 +72,7 @@ const BottomTabs = () => {
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="DangKiTinhNguyenVienScreen">
+      <Stack.Navigator initialRouteName="DangNhap">
         {/* Các màn hình trong Stack Navigator */}
         <Stack.Screen name="QuenMatKhau" component={QuenMatKhauScreen} options={{ headerShown: false }} />
         <Stack.Screen name="XacMinhOTP" component={XacMinhOtpScreen} options={{ headerShown: false }} />

@@ -6,6 +6,7 @@ const { width, height } = Dimensions.get('window'); // Lấy kích thước màn
 
 const ProfileScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedTab, setSelectedTab] = useState('Trang chủ'); // Tab mặc định
 
   const images = [
     'https://i.pinimg.com/564x/35/32/a0/3532a09f083ef3e512b3f5c412a369ea.jpg',
@@ -33,11 +34,22 @@ const ProfileScreen = () => {
         ))}
       </ScrollView>
 
+      {/* Top Navigation Bar (Inside Image) */}
+      <View style={styles.topNav}>
+        <TouchableOpacity onPress={() => setSelectedTab('Follow')}>
+          <Text style={[styles.tabText, selectedTab === 'Follow' && styles.activeTab]}>Follow</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setSelectedTab('Trang chủ')}>
+          <Text style={[styles.tabText, selectedTab === 'Trang chủ' && styles.activeTab]}>Trang chủ</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setSelectedTab('Tìm kiếm')}>
+          <Text style={[styles.tabText, selectedTab === 'Tìm kiếm' && styles.activeTab]}>Tìm kiếm</Text>
+        </TouchableOpacity>
+      </View>
+
       {/* Text Information on Image */}
       <View style={styles.textOverlay}>
         <Text style={styles.userName}>Bo, 22</Text>
-        <Text style={styles.tagline}>Bún đậu nước mắm</Text>
-
         <View style={styles.infoRow}>
           <Icon name="map-marker" size={20} color="#fff" />
           <Text style={styles.infoText}>Đang ở Buôn Ma Thuột</Text>
@@ -67,10 +79,13 @@ const ProfileScreen = () => {
       {/* Action Buttons */}
       <View style={styles.actionButtons}>
         <TouchableOpacity style={styles.actionButtonx}>
-          <Icon name="times" size={30} color="#fff" />
+          <Icon name="times" size={25} color="#fff" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.actionButton}>
-          <Icon name="heart" size={30} color="#fff" />
+          <Icon name="heart" size={25} color="#fff" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.actionButton}>
+          <Icon name="heart" size={25} color="#fff" />
         </TouchableOpacity>
       </View>
     </View>
@@ -84,12 +99,31 @@ const styles = StyleSheet.create({
   },
   profileImage: {
     width,
-    height: height * 0.75, // Chiều cao ảnh bằng 75% chiều cao màn hình
+    // height: height * 0.75, // Chiều cao ảnh bằng 75% chiều cao màn hình
     resizeMode: 'cover',
+  },
+  topNav: {
+    position: 'absolute',
+    top: '5%', // Đặt thanh điều hướng ở 5% từ đầu màn hình
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingVertical: 10,
+  },
+  tabText: {
+    fontSize: 18,
+    color: '#fff',
+  },
+  activeTab: {
+    color: '#fff',
+    fontWeight: 'bold',
+    borderBottomWidth: 2,
+    borderBottomColor: '#fff',
   },
   textOverlay: {
     position: 'absolute',
-    top: '50%', // Đặt văn bản gần phía trên ảnh
+    bottom: '15%',
     left: 20,
     right: 20,
     alignItems: 'flex-start',
@@ -99,12 +133,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
   },
-  tagline: {
-    fontSize: 18,
-    color: '#fff',
-    marginVertical: 10,
-  },
-  infoRow: {
+   infoRow: {
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 5,
@@ -116,7 +145,7 @@ const styles = StyleSheet.create({
   },
   actionButtons: {
     position: 'absolute',
-    bottom: 30, // Đặt các nút ở dưới cùng màn hình
+    bottom: '3%', // Đặt các nút ở dưới cùng màn hình
     left: 20,
     right: 20,
     flexDirection: 'row',
