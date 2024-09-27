@@ -1,8 +1,47 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import React ,{useState}from 'react';
+import Swiper from 'react-native-swiper';
+import { View, Text, Image, TouchableOpacity, ScrollView, StyleSheet, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const UserProfileScreen = () => {
+ 
+  const [isLiked, setIsLiked] = useState(false);
+  const handleLikeToggle = () => {
+    setIsLiked(!isLiked);
+  };
+  const handleSettingsPress = () => {
+    Alert.alert(
+      "Tùy chọn",
+      "Chọn một hành động",
+      [
+        {
+          text: "Hủy",
+          style: "cancel"
+        },
+        {
+          text: "Chặn",
+          onPress: () => Alert.alert('Đã chặn người dùng.')
+        },
+      
+      ]
+    );
+  };
+
+  const [isFollowing, setIsFollowing] = useState(false);
+  const handleFollowToggle = () => {
+    if (isFollowing) {
+      Alert.alert(
+        "Xác nhận",
+        "Bạn có chắc chắn muốn bỏ theo dõi?",
+        [
+          { text: "Hủy", style: "cancel" },
+          { text: "Bỏ theo dõi", onPress: () => setIsFollowing(false) }
+        ]
+      );
+    } else {
+      setIsFollowing(true);
+    }
+  };
   return (
     <ScrollView style={styles.container}>
       {/* Header with Search and Icons */}
@@ -10,14 +49,13 @@ const UserProfileScreen = () => {
         <TouchableOpacity>
           <Ionicons name="arrow-back" size={24} color="gray" />
         </TouchableOpacity>
-        <Text style={styles.searchText}>Tìm kiếm địa điểm, bạn du lịch...</Text>
-        <TouchableOpacity>
-          <Ionicons name="notifications-outline" size={24} color="gray" />
-        </TouchableOpacity>
+        
+       
       </View>
 
       {/* User Profile Section */}
       <View style={styles.profileContainer}>
+        
         <Image
           source={{ uri: 'https://randomuser.me/api/portraits/men/1.jpg' }}
           style={styles.profileImage}
@@ -46,13 +84,18 @@ const UserProfileScreen = () => {
 
           {/* Follow and Message Buttons */}
           <View style={styles.buttonRow}>
-            <TouchableOpacity style={styles.followButton}>
-              <Text style={styles.followButtonText}>+ Theo dõi</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.messageButton}>
-              <Text style={styles.messageButtonText}>Nhắn tin</Text>
-            </TouchableOpacity>
-          </View>
+        <TouchableOpacity style={styles.followButton} onPress={handleFollowToggle}>
+          <Text style={styles.followButtonText}>
+            {isFollowing ? 'Đang theo dõi' : '+ Theo dõi'}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.messageButton}>
+          <Text style={styles.messageButtonText}>Nhắn tin</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handleSettingsPress} style={styles.block}>
+        <Ionicons name="alert-circle" size={24} color="red" />
+</TouchableOpacity>
+      </View>
         </View>
       </View>
 
@@ -77,10 +120,17 @@ const UserProfileScreen = () => {
         />
         {/* Post Interactions */}
         <View style={styles.postInteraction}>
-          <TouchableOpacity>
-            <Ionicons name="heart-outline" size={24} color="gray" />
-            <Text>250</Text>
-          </TouchableOpacity>
+        <View style={styles.postInteraction}>
+  <TouchableOpacity onPress={handleLikeToggle}>
+    <Ionicons 
+      name={isLiked ? "heart" : "heart-outline"} 
+      size={24} 
+      color={isLiked ? "red" : "gray"} 
+    />
+    <Text>{isLiked ? '251' : '250'}</Text>
+  </TouchableOpacity>
+  {/* Các icon khác giữ nguyên */}
+</View>
           <TouchableOpacity>
             <Ionicons name="chatbubble-outline" size={24} color="gray" />
             <Text>45</Text>
@@ -271,6 +321,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: 'gray',
   },
+  block:{
+    marginTop:"2%"
+  }
 });
 
 export default UserProfileScreen;

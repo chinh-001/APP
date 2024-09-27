@@ -63,6 +63,9 @@ const BottomTabs = () => {
       <Tab.Screen name="Home" component={TrangTimBanDuLich} options={{ headerShown: false }} />
       <Tab.Screen name="Search" component={TimKiem} options={{ headerShown: false }} />
       <Tab.Screen name="Add" component={DangBaiScreen} options={{ headerShown: false }} />
+      <Tab.Screen name="Home" component={TrangTimBanDuLich} options={{ headerShown: false }} />
+      <Tab.Screen name="Search" component={TimKiem} options={{ headerShown: false }} />
+      <Tab.Screen name="Add" component={DangBaiScreen} options={{ headerShown: false }} />
       <Tab.Screen name="Notifications" component={ThongBao} options={{ headerShown: false }} />
       <Tab.Screen name="Profile" component={NhanTin} options={{ headerShown: false }} />
     </Tab.Navigator>
