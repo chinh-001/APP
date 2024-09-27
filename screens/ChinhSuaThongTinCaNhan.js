@@ -49,15 +49,16 @@ const PersonalInfoScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop:"10%",
     flex: 1,
-    padding: 16,
+    padding: 10,
     backgroundColor: '#fff',
   },
   header: {
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 16,
+    marginBottom: -33,
   },
   profileImage: {
     width: 100,
