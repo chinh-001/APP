@@ -22,6 +22,7 @@ import DKTinhNguyenVien from './screens/DKTinhNguyenVien';
 import NhanTin from './screens/NhanTin';
 import TrangHomeDangTus from './screens/TrangHomeDangTus';
 import TrangTimBanDuLich from './screens/TrangTimBanDuLich';
+import MapScreen from './screens/MapScreen';
 // Tạo Stack Navigator
 const Stack = createStackNavigator();
 
@@ -60,8 +61,8 @@ const BottomTabs = () => {
     >
       {/* Thêm TrangChuScreen vào Bottom Tab */}
       <Tab.Screen name="Home" component={TrangTimBanDuLich} options={{ headerShown: false }} />
-      <Tab.Screen name="Search" component={TimKiem} />
-      <Tab.Screen name="Add" component={DangBaiScreen} />
+      <Tab.Screen name="Search" component={TimKiem} options={{ headerShown: false }} />
+      <Tab.Screen name="Add" component={DangBaiScreen} options={{ headerShown: false }} />
       <Tab.Screen name="Notifications" component={ThongBao} options={{ headerShown: false }} />
       <Tab.Screen name="Profile" component={NhanTin} options={{ headerShown: false }} />
     </Tab.Navigator>
@@ -87,7 +88,7 @@ const App = () => {
         <Stack.Screen name="DKTinhNguyenVien" component={DKTinhNguyenVien} options={{ headerShown: false }} />
         <Stack.Screen name="NhanTin" component={NhanTin} options={{ headerShown: false }} />
         <Stack.Screen name="DangKiDulichScreen" component={DangKiDulichScreen} options={{ headerShown: false }} />
-
+        <Stack.Screen name="MapScreen" component={MapScreen} options={{ title: 'Chọn điểm đến' }} />
         {/* Thay thế TrangChu bằng BottomTabs */}
         <Stack.Screen name="TrangChu" component={BottomTabs} options={{ headerShown: false }} />
         

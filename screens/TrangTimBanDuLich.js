@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-const { width, height } = Dimensions.get('window'); // Lấy kích thước màn hình
+const { width, height } = Dimensions.get('window');
+
+const TopTab = createMaterialTopTabNavigator();
+
+// Placeholder components for each tab
+const FollowScreen = () => <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><Text>Follow Screen</Text></View>;
+const TrangChuScreen = () => <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><Text>Trang Chủ Screen</Text></View>;
+const TimKiemScreen = () => <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><Text>Tìm Kiếm Screen</Text></View>;
 
 const ProfileScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedTab, setSelectedTab] = useState('Trang chủ'); // Tab mặc định
 
   const images = [
     'https://i.pinimg.com/564x/35/32/a0/3532a09f083ef3e512b3f5c412a369ea.jpg',
@@ -36,15 +43,17 @@ const ProfileScreen = () => {
 
       {/* Top Navigation Bar (Inside Image) */}
       <View style={styles.topNav}>
-        <TouchableOpacity onPress={() => setSelectedTab('Follow')}>
-          <Text style={[styles.tabText, selectedTab === 'Follow' && styles.activeTab]}>Follow</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setSelectedTab('Trang chủ')}>
-          <Text style={[styles.tabText, selectedTab === 'Trang chủ' && styles.activeTab]}>Trang chủ</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setSelectedTab('Tìm kiếm')}>
-          <Text style={[styles.tabText, selectedTab === 'Tìm kiếm' && styles.activeTab]}>Tìm kiếm</Text>
-        </TouchableOpacity>
+        <TopTab.Navigator
+          screenOptions={{
+            tabBarStyle: { backgroundColor: 'transparent' },
+            tabBarLabelStyle: styles.tabText,
+            tabBarIndicatorStyle: { backgroundColor: '#fff' },
+          }}
+        >
+          <TopTab.Screen name="Follow" component={FollowScreen} />
+          <TopTab.Screen name="TrangChu" component={TrangChuScreen} options={{ tabBarLabel: 'Trang chủ' }} />
+          <TopTab.Screen name="TimKiem" component={TimKiemScreen} options={{ tabBarLabel: 'Tìm kiếm' }} />
+        </TopTab.Navigator>
       </View>
 
       {/* Text Information on Image */}
@@ -99,27 +108,18 @@ const styles = StyleSheet.create({
   },
   profileImage: {
     width,
-    // height: height * 0.75, // Chiều cao ảnh bằng 75% chiều cao màn hình
     resizeMode: 'cover',
   },
   topNav: {
     position: 'absolute',
-    top: '5%', // Đặt thanh điều hướng ở 5% từ đầu màn hình
+    top: 0,
     left: 0,
     right: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 10,
+    height: 50,
   },
   tabText: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#fff',
-  },
-  activeTab: {
-    color: '#fff',
-    fontWeight: 'bold',
-    borderBottomWidth: 2,
-    borderBottomColor: '#fff',
   },
   textOverlay: {
     position: 'absolute',
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
   },
-   infoRow: {
+  infoRow: {
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 5,
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   },
   actionButtons: {
     position: 'absolute',
-    bottom: '3%', // Đặt các nút ở dưới cùng màn hình
+    bottom: '3%',
     left: 20,
     right: 20,
     flexDirection: 'row',
