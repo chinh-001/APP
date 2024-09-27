@@ -120,7 +120,7 @@ const DangBaiScreen = () => {
                                     placeholder="Tiêu đề của bạn"
                                     value={title}
                                     onChangeText={setTitle}
-                                    multiline={true}
+                                  
                                 />
                             </View>
 
@@ -176,7 +176,7 @@ const DangBaiScreen = () => {
                                     placeholder="Mô tả kế hoạch du lịch của bạn"
                                     value={description}
                                     onChangeText={setDescription}
-                                    multiline={true}
+                                  
                                 />
                             </View>
 

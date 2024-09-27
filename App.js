@@ -23,6 +23,7 @@ import NhanTin from './screens/NhanTin';
 import TrangChuScreen from './screens/TrangChuScreen';
 import TrangHomeDangTus from './screens/TrangHomeDangTus';
 import TrangTimBanDuLich from './screens/TrangTimBanDuLich';
+import ChinhSuaThongTinCaNhan from './screens/ChinhSuaThongTinCaNhan';
 // Tạo Stack Navigator
 const Stack = createStackNavigator();
 
@@ -65,7 +66,7 @@ const BottomTabs = () => {
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="TrangChu">
+      <Stack.Navigator initialRouteName="DangKy">
         <Stack.Screen name="QuenMatKhau" component={QuenMatKhauScreen} options={{ headerShown: false }} />
         <Stack.Screen name="BottomTabs" component={BottomTabs} options={{ headerShown: false }} />
         <Stack.Screen name="XacMinhOTP" component={XacMinhOtpScreen} options={{ headerShown: false }} />
@@ -75,7 +76,7 @@ const App = () => {
         <Stack.Screen name="DoiMK" component={DoiMk} options={{ headerShown: false }} />
         <Stack.Screen name="TimKiemBanDuLich" component={TimKiemBanDuLich} options={{ headerShown: false }} />
         <Stack.Screen name="ThongTinCaNhan" component={ThongTinCaNhan} options={{ headerShown: false }} />
-        <Stack.Screen name="Blog" component={Blog} options={{ headerShown: false }} />
+       <Stack.Screen name="Blog" component={Blog} options={{ headerShown: false }} />
         <Stack.Screen name="DangKiTinhNguyenVienScreen" component={DangKiTinhNguyenVienScreen} options={{ headerShown: false }} />
         <Stack.Screen name="DKTinhNguyenVien" component={DKTinhNguyenVien} options={{ headerShown: false }} />
         <Stack.Screen name="NhanTin" component={NhanTin} options={{ headerShown: false }} />
@@ -83,6 +84,7 @@ const App = () => {
         <Stack.Screen name="TrangChu" component={TrangChuScreen} options={{ headerShown: false }} />
         <Stack.Screen name="TrangHomeDangTus" component={TrangHomeDangTus} options={{ headerShown: false }} />
         <Stack.Screen name="TrangTimBanDuLich" component={TrangTimBanDuLich} options={{ headerShown: false }} />
+        <Stack.Screen name="ChinhSuaThongTinCaNhan" component={ChinhSuaThongTinCaNhan} options={{ headerShown: false }} />
 
       </Stack.Navigator>
     </NavigationContainer>
