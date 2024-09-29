@@ -23,6 +23,7 @@ const DangKiDulichScreen = () => {
             <View style={styles.inner}>
                 <View style={styles.headerRow}>
                     <TouchableOpacity style={styles.backButton}>
+                    <TouchableOpacity style={styles.backButton}>
                         <Image
                             source={require('../assets/buttonback.png')} // Đường dẫn tới hình ảnh trong assets
                             style={styles.backIcon}

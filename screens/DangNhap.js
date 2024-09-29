@@ -1,16 +1,42 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, Dimensions, KeyboardAvoidingView, Platform, ImageBackground } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, Dimensions, KeyboardAvoidingView, Platform, ImageBackground,Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
-
+import API_ENDPOINTS from '../apiConfig';
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
-  const handleLogin = () => {
-    navigation.navigate('BottomTabs');
+  const handleLogin = async () => {
+    try {
+      const response = await fetch(API_ENDPOINTS.login, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Store the token securely (e.g., using AsyncStorage or a secure storage solution)
+        // For simplicity, we're just logging it here
+        console.log('Token:', data.token);
+        Alert.alert('Success', 'Login successful');
+        navigation.navigate('TrangChu');
+      } else {
+        Alert.alert('Error', data.message || 'Login failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      Alert.alert('Error', 'An error occurred. Please try again.');
+    }
   };
 
   const handleRegister = () => {
