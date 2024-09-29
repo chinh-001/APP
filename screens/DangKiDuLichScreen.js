@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
-import { SafeAreaView, View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
+
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Swiper from 'react-native-swiper';
@@ -22,7 +22,7 @@ const DangKiDulichScreen = () => {
 
             <View style={styles.inner}>
                 <View style={styles.headerRow}>
-                    <TouchableOpacity style={styles.backButton} onPress={handleBack}>
+                    <TouchableOpacity style={styles.backButton}>
                         <Image
                             source={require('../assets/buttonback.png')} // Đường dẫn tới hình ảnh trong assets
                             style={styles.backIcon}
@@ -135,7 +135,6 @@ const styles = StyleSheet.create({
         marginRight: '50%',
         width: '50%',
         marginLeft: '10%',
-        left: 20
         left: 20
     },
     backButton: {
@@ -253,7 +252,6 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         height: '60%',  // Đảm bảo chiều cao cho Swiper
-        borderRadius: 40
         borderRadius: 40
     },
     slide: {

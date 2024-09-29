@@ -32,7 +32,7 @@ const ProfileScreen = () => {
           <Image key={index} source={{ uri: image }} style={styles.profileImage} />
         ))}
       </ScrollView>
-
+        
       {/* Text Information on Image */}
       <View style={styles.textOverlay}>
         <Text style={styles.userName}>Bo, 22</Text>
