@@ -1,35 +1,7 @@
-import React, { useState, useRef } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, Dimensions,FlatList } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, Dimensions, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-const { width, height } = Dimensions.get('window');
-
-const TopTab = createMaterialTopTabNavigator();
-
-// Placeholder components for each tab
-const FollowScreen = () => <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><Text>Follow Screen</Text></View>;
-const TrangChuScreen = () => <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><Text>Trang Chủ Screen</Text></View>;
-const TimKiemScreen = () => <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><Text>Tìm Kiếm Screen</Text></View>;
-
-const ProfileScreen = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const images = [
-    'https://i.pinimg.com/564x/35/32/a0/3532a09f083ef3e512b3f5c412a369ea.jpg',
-    'https://i.pinimg.com/564x/cb/66/54/cb6654c65688ad61a40c132a471b2b2a.jpg',
-    'https://i.pinimg.com/564x/35/fa/22/35fa22795204c0748f7e099adb7b6e64.jpg',
-  ];
-
-  const handleScroll = (event) => {
-    const slideIndex = Math.round(event.nativeEvent.contentOffset.x / width);
-    setCurrentIndex(slideIndex);
-  };
-
-  return (
-    <View style={styles.container}>
-      {/* Horizontal Scrollable Images */}
-      <ScrollView
 const { width, height } = Dimensions.get('window');
 
 const users = [
@@ -66,24 +38,27 @@ const users = [
 ];
 
 const ProfileScreen = () => {
+  const handleScroll = (event) => {
+    // Hàm dùng để xử lý sự kiện scroll, bạn có thể bổ sung thêm logic nếu cần.
+  };
+
   const renderItem = ({ item: user }) => (
     <View style={styles.userContainer}>
-      <FlatList
-        data={user.images}
+      {/* Dùng FlatList để render hình ảnh */}
+      <ScrollView
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         onScroll={handleScroll}
         scrollEventThrottle={16}
       >
-        {images.map((image, index) => (
+        {user.images.map((image, index) => (
           <Image key={index} source={{ uri: image }} style={styles.profileImage} />
         ))}
       </ScrollView>
-        
-      {/* Text Information on Image */}
+
+      {/* Hiển thị thông tin người dùng */}
       <View style={styles.textOverlay}>
-        <Text style={styles.userName}>Bo, 22</Text>
         <Text style={styles.userName}>{user.name}</Text>
         <Text style={styles.tagline}>{user.tagline}</Text>
 
@@ -113,12 +88,10 @@ const ProfileScreen = () => {
         </View>
       </View>
 
+      {/* Nút hành động */}
       <View style={styles.actionButtons}>
         <TouchableOpacity style={styles.actionButtonx}>
           <Icon name="times" size={25} color="#fff" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.actionButton}>
-          <Icon name="heart" size={25} color="#fff" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.actionButton}>
           <Icon name="heart" size={25} color="#fff" />
@@ -144,42 +117,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#000',
   },
-  userNameContainer: {
-    borderWidth: 5, // Border width
-    borderColor: '#009900', // Green border color
-    borderRadius: 15, // Rounded corners
-    padding: 10, // Padding inside the border
-    marginVertical: 10, // Space between elements
-    alignItems: 'center', // Center the text
-  },
-  userName: {
-    borderRadius: 15, 
-    borderWidth: 3,
-    borderColor: '#BBBBBB',
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#CC0033',
-  },
   profileImage: {
     width,
     height: height * 1,
     resizeMode: 'cover',
   },
-  topNav: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 50,
-  },
-  tabText: {
-    fontSize: 16,
-    color: '#fff',
-  },
   textOverlay: {
     position: 'absolute',
     bottom: '15%',
-    top: '45%',
     left: 20,
     right: 20,
     alignItems: 'flex-start',
@@ -189,7 +134,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
   },
- 
   tagline: {
     fontSize: 18,
     color: '#fff',
@@ -202,22 +146,12 @@ const styles = StyleSheet.create({
   },
   infoText: {
     marginLeft: 10,
-    borderRadius: 15, 
-    borderWidth: 3,
-    borderColor: '#696969',
-    fontSize: 18, // Increased from 16 to 18
-    fontWeight: '600', // Added medium font weight
+    fontSize: 18,
+    fontWeight: '600',
     color: '#fff',
-    padding: 5,
-    textShadowColor: 'rgba(5, 1, 5, 5)', // Added text shadow
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 10,
   },
   actionButtons: {
-    marginBottom:"9%",
-    
     position: 'absolute',
-    bottom: '3%',
     bottom: 30,
     left: 20,
     right: 20,
